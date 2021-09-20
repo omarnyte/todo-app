@@ -25,10 +25,6 @@ Tests are written using [Jest](https://jestjs.io/).
         
   `npm test`
 
-- To run tests in watch mode: 
-
-  `npm test:watch`
-
 ## CI/CD
 This project uses Github Actions for CI/CD. The worfklow will:
 - run all tests
