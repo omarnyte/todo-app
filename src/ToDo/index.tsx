@@ -1,4 +1,4 @@
-import { DescriptionLabel, DueDate, ToDoWrapper } from './styles';
+import { CheckboxInput, DescriptionLabel, DueDate, ToDoWrapper } from './styles';
 
 export type TodoProps = {
 	description: string;
@@ -29,16 +29,21 @@ const Todo = ({ description, dueDate, isComplete, onCheckboxChange }: TodoProps)
 	return (
 		<ToDoWrapper backgroundColor={determineBackgroundColor()}>
 			<div>
-				<input
+				<CheckboxInput
 					checked={isComplete}
 					id={description}
 					onChange={onCheckboxChange}
 					type="checkbox"
 				/>
-				<DescriptionLabel data-testid="to-do-description" htmlFor={description} shouldStrikeThrough={isComplete}>
+				<DescriptionLabel
+					data-testid="to-do-description"
+					htmlFor={description}
+					shouldStrikeThrough={isComplete}
+				>
 					{description}
 				</DescriptionLabel>
 			</div>
+
 			{dueDate && <DueDate>{formatDate(dueDate)}</DueDate>}
 		</ToDoWrapper>
 	)
