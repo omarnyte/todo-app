@@ -1,4 +1,4 @@
-import { ToDo, ToDosJSONResponse } from './types';
+import { ToDo, ToDosJSONResponse } from '../types';
 
 const sortByDate = (toDos: ToDo[]) => {
 	return toDos.sort((firstToDo, secondToDo) => {
