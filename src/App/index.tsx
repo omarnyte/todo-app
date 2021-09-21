@@ -1,67 +1,55 @@
 import { useEffect, useState } from 'react';
-import styled from 'styled-components';
 
+import { AppWrapper, H1, HeadingWrapper } from './styles';
+import { sortToDos } from './utils';
+import { ToDosJSONResponse  } from './types';
 import ToDo from '../ToDo';
+import { TODOS_ENDPOINT } from '../constants';
 
-type Todo = {
-  id: string;
-  description: string;
-  dueDate: string | null;
-  isComplete: boolean;
-}
-
-type TodosJSONResponse = Todo[];
-
-const TODOS_ENDPOINT = 'https://944ba3c5-94c3-4369-a9e6-a509d65912e2.mock.pstmn.io/get';
 const API_KEY = 'PMAK-5ef63db179d23c004de50751-10300736bc550d2a891dc4355aab8d7a5c';
 
-const AppWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const HeaderWrapper = styled.div`
-  margin-bottom: 10px;
-  padding-left: 10px;
-  width: 100%;
-  background-color: #363754;
-`;
-
-const H1 = styled.h1`
-  color: white;
-  font-size: 18px;
-`;
-
 function App() {
-  const [todosData, setTodosData] = useState<TodosJSONResponse>([]);
-  
+  const [todosData, setTodosData] = useState<ToDosJSONResponse>([]);
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     const fetchTodos = async () => {
       const headers = { 'X-Api-Key': API_KEY };
       const todosResponse = await fetch(TODOS_ENDPOINT, { headers });
-      const todosJsonResponse: TodosJSONResponse = await todosResponse.json();
+      const todosJsonResponse: ToDosJSONResponse = await todosResponse.json();
+      setIsLoading(false);
       setTodosData(todosJsonResponse);
     }
 
+    setIsLoading(true);
     fetchTodos();
   }, [])
-  
+
+  const sortedTodos = sortToDos(todosData);
+
   return (
     <AppWrapper className="App">
-      <HeaderWrapper>
+      <HeadingWrapper>
         <H1>Todo App</H1>
-      </HeaderWrapper>
-      {todosData.map((todo) => (
-        <ToDo
-          description={todo.description}
-          dueDate={todo.dueDate}
-          isComplete={todo.isComplete}
-          // TODO: make API call
-          onCheckboxChange={() => alert('clicked')}
-          key={todo.id}
-        />
-      ))}
+      </HeadingWrapper>
+
+      {isLoading ? (
+        <span>Loading...</span>
+      ): (
+        <>
+          {sortedTodos.map((todo) => (
+            <ToDo
+              description={todo.description}
+              dueDate={todo.dueDate}
+              isComplete={todo.isComplete}
+              onCheckboxChange={() => alert('clicked')}
+              key={todo.id}
+            />
+          ))}
+        </>
+      ) 
+    }
+
     </AppWrapper>
   );
 }

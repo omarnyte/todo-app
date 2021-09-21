@@ -15,9 +15,19 @@ const formatDate = (dateString: string) => {
 }
 
 const Todo = ({ description, dueDate, isComplete, onCheckboxChange }: TodoProps) => {
+	const determineBackgroundColor = () => {
+		if (isComplete) return 'lightgreen';
+
+		const isOverdue = dueDate && new Date(dueDate) < new Date();
+		if (isOverdue) {
+			return 'pink';
+		}
+
+		return 'lightgray'; 
+	}
+	
 	return (
-		<ToDoWrapper>
-			{/* Style checkbox */}
+		<ToDoWrapper backgroundColor={determineBackgroundColor()}>
 			<div>
 				<input
 					checked={isComplete}
@@ -25,7 +35,7 @@ const Todo = ({ description, dueDate, isComplete, onCheckboxChange }: TodoProps)
 					onChange={onCheckboxChange}
 					type="checkbox"
 				/>
-				<DescriptionLabel htmlFor={description} shouldStrikeThrough={isComplete}>
+				<DescriptionLabel data-testid="to-do-description" htmlFor={description} shouldStrikeThrough={isComplete}>
 					{description}
 				</DescriptionLabel>
 			</div>
