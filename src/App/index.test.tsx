@@ -21,7 +21,7 @@ test('renders the app heading', () => {
   expect(heading).toHaveTextContent('Todo App');
 });
 
-test('renders To Do list items in order', async () => {
+test('renders To Do list items in sorted order', async () => {
   render(
     <QueryClientProvider client={new QueryClient()}>
       <App />
@@ -55,9 +55,9 @@ describe('updating items', () => {
       const descriptions = screen.getAllByTestId('to-do-description')
       expect(descriptions[0]).toHaveTextContent('First Overdue Item');
       expect(descriptions[1]).toHaveTextContent('Second Overdue Item');
-      expect(descriptions[2]).toHaveTextContent('Third Overdue Item');
-      expect(descriptions[3]).toHaveTextContent('First Pending Item');
-      expect(descriptions[4]).toHaveTextContent('First Complete Item');
+      expect(descriptions[2]).toHaveTextContent('First Pending Item');
+      expect(descriptions[3]).toHaveTextContent('First Complete Item');
+      expect(descriptions[4]).toHaveTextContent('Third Overdue Item');
       expect(descriptions[5]).toHaveTextContent('Second Complete Item');
     });
   });

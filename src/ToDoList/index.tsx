@@ -1,8 +1,13 @@
+import styled from 'styled-components';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 import { fetchTodos, sortToDos, updateToDo } from './utils';
 import ToDo from '../ToDo';
 import { ToDosJSONResponse  } from '../types';
+
+const StatusWrapper = styled.div`
+	height: 25px;
+`;
 
 const ToDoList = () => {
   const toDosQuery = useQuery<ToDosJSONResponse>('todos', fetchTodos);
@@ -33,6 +38,7 @@ const ToDoList = () => {
 
 	return (
 		<>
+			<StatusWrapper>{todoMutation.isLoading && 'Updating...'}</StatusWrapper>
 			{sortToDos(toDosQuery.data).map((todo) => (
 				<ToDo
 					description={todo.description}
