@@ -16,8 +16,13 @@ export const ToDoWrapper = styled.div<{ backgroundColor: string }>`
 	}
 `;
 
+export const CheckboxInput = styled.input`
+	cursor: pointer;
+`;
+
 export const DescriptionLabel = styled.label<{ shouldStrikeThrough: boolean }>`
 	text-decoration: ${({ shouldStrikeThrough }) => shouldStrikeThrough && "line-through"};
+	cursor: pointer;
 `;
 
 export const DueDate = styled.span`
