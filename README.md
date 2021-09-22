@@ -2,6 +2,7 @@
 [![Node.js CI](https://github.com/omarnyte/todo-app/actions/workflows/test.yml/badge.svg)](https://github.com/omarnyte/todo-app/actions/workflows/test.yml)
 
 ## Local Development
+This single-page React web app fetches a mock To Do list. It allows a user to update the completion status of the To Do list items. The app is deployed to https://my-little-to-do-app.herokuapp.com/. 
 
 ### Requirements
 - [Node.js](https://nodejs.org/en/)
@@ -35,3 +36,8 @@ This project uses Github Actions for CI/CD. The worfklow will:
 2. Follow the [setup](#setup) steps outlined above.
 3. Make your changes, ensuring that code coverage remains at 100%.
 4. Open a pull request documenting your changes. Please ensure that that GitHub Actions workflow succeeds. 
+
+## Deployment
+- Production: https://my-little-to-do-app.herokuapp.com/
+
+This repo's `main` branch automatically deploys to Heroku after the GitHub Actions workflow succeeds.
