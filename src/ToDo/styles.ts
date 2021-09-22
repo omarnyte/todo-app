@@ -16,8 +16,9 @@ export const ToDoWrapper = styled.div<{ backgroundColor: string }>`
 	}
 `;
 
-export const CheckboxInput = styled.input`
-	cursor: pointer;
+export const LeftWrapper = styled.div`
+	display: flex;
+	align-items: center;
 `;
 
 export const DescriptionLabel = styled.label<{ shouldStrikeThrough: boolean }>`
