@@ -8,7 +8,7 @@ export const AppWrapper = styled.div`
 
 export const HeadingWrapper = styled.div`
   margin-bottom: 10px;
-  padding-left: 10px;
+  padding-left: 25px;
   width: 100%;
   background-color: #363754;
 `;

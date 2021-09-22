@@ -38,9 +38,9 @@ export const sortToDos = (toDos: ToDosJSONResponse): ToDosJSONResponse => {
 }
 
 const API_KEY = 'PMAK-5ef63db179d23c004de50751-10300736bc550d2a891dc4355aab8d7a5c';
+const headers = { 'X-Api-Key': API_KEY };
 
 export const fetchTodos = async () => {
-	const headers = { 'X-Api-Key': API_KEY };
 	const response = await fetch(TODOS_ENDPOINT, { headers });
 	if (!response.ok) {
 		throw new Error('Network response was not ok')
@@ -53,7 +53,6 @@ const generateToDoPatchEndpoint = (toDoId: string) => `https://944ba3c5-94c3-436
 
 export const updateToDo = async ({ isComplete, toDoId }: { isComplete: boolean; toDoId: string }) => {
 	const body = JSON.stringify({ isComplete });
-	const headers = { 'X-Api-Key': API_KEY };
 	const response = await fetch(generateToDoPatchEndpoint(toDoId), {
 		body,
 		headers, 

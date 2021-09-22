@@ -1,4 +1,11 @@
-import { CheckboxInput, DescriptionLabel, DueDate, ToDoWrapper } from './styles';
+import Checkbox from '@mui/material/Checkbox';
+import { DescriptionLabel, DueDate, LeftWrapper, ToDoWrapper } from './styles';
+
+const colors = {
+	gray: '#f2f2f2',
+	green: '#cdffcc',
+	red: '#ffcccc',
+}
 
 export type TodoProps = {
 	description: string;
@@ -16,24 +23,30 @@ const formatDate = (dateString: string) => {
 
 const Todo = ({ description, dueDate, isComplete, onCheckboxChange }: TodoProps) => {
 	const determineBackgroundColor = () => {
-		if (isComplete) return 'lightgreen';
+		if (isComplete) return colors.green;
 
 		const isOverdue = dueDate && new Date(dueDate) < new Date();
 		if (isOverdue) {
-			return 'pink';
+			return colors.red;
 		}
 
-		return 'lightgray'; 
+		return colors.gray; 
 	}
 	
 	return (
 		<ToDoWrapper backgroundColor={determineBackgroundColor()}>
-			<div>
-				<CheckboxInput
+			<LeftWrapper>
+				<Checkbox
 					checked={isComplete}
 					id={description}
 					onChange={onCheckboxChange}
-					type="checkbox"
+					size="small"
+					sx={{
+						color: 'black',
+						'&.Mui-checked': {
+							color: 'black',
+						},
+					}}
 				/>
 				<DescriptionLabel
 					data-testid="to-do-description"
@@ -42,7 +55,7 @@ const Todo = ({ description, dueDate, isComplete, onCheckboxChange }: TodoProps)
 				>
 					{description}
 				</DescriptionLabel>
-			</div>
+			</LeftWrapper>
 
 			{dueDate && <DueDate>{formatDate(dueDate)}</DueDate>}
 		</ToDoWrapper>
