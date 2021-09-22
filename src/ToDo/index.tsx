@@ -1,6 +1,12 @@
 import Checkbox from '@mui/material/Checkbox';
 import { DescriptionLabel, DueDate, LeftWrapper, ToDoWrapper } from './styles';
 
+const colors = {
+	gray: '#f2f2f2',
+	green: '#cdffcc',
+	red: '#ffcccc',
+}
+
 export type TodoProps = {
 	description: string;
 	dueDate: string | null;
@@ -17,14 +23,14 @@ const formatDate = (dateString: string) => {
 
 const Todo = ({ description, dueDate, isComplete, onCheckboxChange }: TodoProps) => {
 	const determineBackgroundColor = () => {
-		if (isComplete) return 'lightgreen';
+		if (isComplete) return colors.green;
 
 		const isOverdue = dueDate && new Date(dueDate) < new Date();
 		if (isOverdue) {
-			return 'pink';
+			return colors.red;
 		}
 
-		return 'lightgray'; 
+		return colors.gray; 
 	}
 	
 	return (
